@@ -1,4 +1,6 @@
-// src/services/github.service.js
+// src/mastra/tools/github.tool.js
+// This is where our GitHub API logic lives.
+require('dotenv').config({ path: '../../../.env' }); // Go up 3 levels to find .env
 const axios = require('axios');
 
 // --- GitHub Configuration ---
@@ -22,12 +24,7 @@ const githubApi = axios.create({
 async function listOpenIssues() {
   try {
     const response = await githubApi.get('/issues', {
-      params: {
-        state: 'open',
-        sort: 'created',
-        direction: 'desc',
-        per_page: 5
-      }
+      params: { state: 'open', sort: 'created', direction: 'desc', per_page: 5 }
     });
 
     const issues = response.data;
@@ -36,7 +33,7 @@ async function listOpenIssues() {
     }
 
     let issueList = `Here are the 5 most recent open issues for ${GITHUB_OWNER}/${GITHUB_REPO}:\n\n`;
-    issues.forEach(issue => {
+    issues.forEach((issue) => {
       issueList += `* **#${issue.number}**: ${issue.title}\n    *Link:* ${issue.html_url}\n`;
     });
     return issueList;
@@ -49,31 +46,12 @@ async function listOpenIssues() {
 
 /**
  * Creates a new issue in the repo.
- * Command format: /@agent gh create "Issue Title" "Issue Body"
  */
-async function createNewIssue(command) {
-  // Simple regex to parse the command
-  
-  const regex = /\/@agent gh create \"(.*?)\" \"(.*?)\"/; 
-
-  const match = command.match(regex);
-
-  if (!match || !match[1] || !match[2]) {
-    return "Invalid format. Please use: `/@agent gh create \"Title\" \"Body\"`";
-  }
-
-  const title = match[1];
-  const body = match[2];
-
+async function createNewIssue(title, body) {
   try {
-    const response = await githubApi.post('/issues', {
-      title: title,
-      body: body
-    });
-
+    const response = await githubApi.post('/issues', { title, body });
     const newIssue = response.data;
     return `✅ **Issue Created!**\n\n* **#${newIssue.number}**: ${newIssue.title}\n* *Link:* ${newIssue.html_url}`;
-
   } catch (error) {
     console.error("Error creating issue:", error.response ? error.response.data : error.message);
     throw new Error("Could not create the issue on GitHub.");

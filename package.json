@@ -1,24 +1,22 @@
 {
-  "name": "telex-github-bot",
+  "name": "telex-github-bot-mastra-js",
   "version": "1.0.0",
-  "description": "An interactive AI agent for Telex to manage GitHub issues.",
-  "main": "src/server.js",
+  "description": "A Mastra-native AI agent for the Telex hackathon to manage GitHub issues (JavaScript version).",
+  "main": "src/mastra/index.js",
   "scripts": {
-    "start": "node src/server.js",
-    "dev": "node --watch src/server.js"
+    "start": "node src/mastra/index.js",
+    "dev": "node --watch src/mastra/index.js"
   },
   "keywords": [
     "telex",
     "ai-agent",
-    "hackathon",
-    "github",
-    "bot"
+    "mastra",
+    "github"
   ],
   "author": "tobechukwujs",
   "license": "ISC",
   "dependencies": {
     "axios": "^1.7.2",
-    "dotenv": "^16.4.5",
-    "express": "^4.19.2"
+    "dotenv": "^16.4.5"
   }
 }

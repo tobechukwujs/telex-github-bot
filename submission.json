@@ -12,6 +12,8 @@
       "description": "Creates a new issue with the specified title and body."
     }
   ],
-  "webhook_url": "https://your-live-api-url.com/api/telex",
+  "webhook_url": "https://[YOUR-MASTRA-URL-GOES-HERE]",
   "auth_type": "none"
 }
+
+
