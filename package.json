@@ -1,22 +1,32 @@
 {
-  "name": "telex-github-bot-mastra-js",
+  "name": "telex-github-bot-mastra-ts",
   "version": "1.0.0",
-  "description": "A Mastra-native AI agent for the Telex hackathon to manage GitHub issues (JavaScript version).",
-  "main": "src/mastra/index.js",
+  "description": "A Mastra-compliant Telex AI agent to manage GitHub issues, built with TypeScript.",
+  "main": "dist/mastra/index.js",
   "scripts": {
-    "start": "node src/mastra/index.js",
-    "dev": "node --watch src/mastra/index.js"
+    "clean": "rmdir /s /q dist 2>nul || true",
+    "build": "npm run clean && tsc",
+    "start": "node dist/mastra/index.js",
+    "dev": "ts-node src/mastra/index.ts"
   },
   "keywords": [
     "telex",
-    "ai-agent",
     "mastra",
-    "github"
+    "github",
+    "bot"
   ],
   "author": "tobechukwujs",
   "license": "ISC",
   "dependencies": {
     "axios": "^1.7.2",
-    "dotenv": "^16.4.5"
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.14.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.3"
   }
 }
+
